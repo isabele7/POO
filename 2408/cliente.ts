@@ -10,7 +10,7 @@ export class Usuario {
         this.dinheiro = dinheiro;
     }
 
-    alugar(bicicleta: Bicicleta, dataInicio: Date, dataTermino: Date): Aluguel | null {
+    alugar(bicicleta: Bicicleta, dataInicio: Date, dataTermino: Date) {
         if (bicicleta.disponivel && bicicleta.usuarioAtual === null && this.dinheiro >= bicicleta.preco) {
             const aluguel = new Aluguel(dataInicio, dataTermino);
             aluguel.bicicleta = bicicleta;
