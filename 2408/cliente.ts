@@ -11,10 +11,11 @@ export class Usuario {
     }
 
     alugar(bicicleta: Bicicleta, dataInicio: Date, dataTermino: Date){
-        if (bicicleta.disponivel && bicicleta.usuarioAtual === null) {
+        if (bicicleta.disponivel && bicicleta.usuarioAtual === null && this.dinheiro >= preco) {
             const aluguel = new Aluguel(dataInicio, dataTermino); 
             bicicleta.usuarioAtual = this.nome;
             bicicleta.disponivel = false;
+            this.dinheiro -= preco;
             return aluguel;
         }
     }
