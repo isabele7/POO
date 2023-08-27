@@ -13,8 +13,6 @@ export class Usuario {
     alugar(bicicleta: Bicicleta, dataInicio: Date, dataTermino: Date) {
         if (bicicleta.disponivel && bicicleta.usuarioAtual === null && this.dinheiro >= bicicleta.preco) {
             const aluguel = new Aluguel(dataInicio, dataTermino);
-            aluguel.bicicleta = bicicleta;
-            aluguel.usuario = this;
             bicicleta.usuarioAtual = this.nome;
             bicicleta.disponivel = false;
             this.dinheiro -= bicicleta.preco;
@@ -22,13 +20,10 @@ export class Usuario {
         }
     }
 
-    devolver(bicicleta: Bicicleta): void {
+    devolver(bicicleta: Bicicleta) {
         if (!bicicleta.disponivel && bicicleta.usuarioAtual === this.nome) {
             bicicleta.usuarioAtual = null;
             bicicleta.disponivel = true;
-            console.log("Bicicleta devolvida com sucesso.");
-        } else {
-            console.log("Você não pode devolver esta bicicleta.");
         }
     }
 }
