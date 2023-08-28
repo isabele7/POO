@@ -11,19 +11,17 @@ export class Usuario {
     }
 
     alugar(bicicleta: Bicicleta, dataInicio: Date, dataTermino: Date) {
-        if (bicicleta.disponivel && bicicleta.usuarioAtual === null && this.dinheiro >= bicicleta.preco) {
-            const aluguel = new Aluguel(dataInicio, dataTermino);
-            bicicleta.usuarioAtual = this.nome;
-            bicicleta.disponivel = false;
-            this.dinheiro -= bicicleta.preco;
+        if (bicicleta.isDisponivel() && this.dinheiro >= bicicleta.preco) {
+            const aluguel = new Aluguel(dataInicio, dataTermino, bicicleta.preco);
+            bicicleta.iniciarAluguel(this.nome);
+            this.dinheiro -= aluguel.calcularValorTotal();
             return aluguel;
         }
     }
 
     devolver(bicicleta: Bicicleta) {
-        if (!bicicleta.disponivel && bicicleta.usuarioAtual === this.nome) {
-            bicicleta.usuarioAtual = null;
-            bicicleta.disponivel = true;
+        if (!bicicleta.isDisponivel() && bicicleta.usuarioAtual === this.nome) {
+            bicicleta.finalizarAluguel();
         }
     }
 }
