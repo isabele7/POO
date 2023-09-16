@@ -9,7 +9,6 @@ class Address {
   }
   
 export class Bike {
-
     constructor(
       public name: string,
       public type: string,
